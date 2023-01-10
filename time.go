@@ -46,6 +46,11 @@ func TimeFromPtr(t *time.Time) Time {
 	return NewTime(*t, true)
 }
 
+// TimeFromUnix creates a new Time that will always be valid.
+func TimeFromUnix(sec int64, nsec int64) Time {
+	return NewTime(time.Unix(sec, nsec), true)
+}
+
 // ValueOrZero returns the inner value if valid, otherwise zero.
 func (t Time) ValueOrZero() time.Time {
 	if !t.Valid {
