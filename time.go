@@ -51,6 +51,14 @@ func TimeFromUnix(sec int64, nsec int64) Time {
 	return NewTime(time.Unix(sec, nsec), true)
 }
 
+// TimeFromUnixSecondPtr creates a new Time that will be null if sec is nil.
+func TimeFromUnixSecondPtr(sec *int64) Time {
+	if sec == nil {
+		return NewTime(time.Time{}, false)
+	}
+	return TimeFromUnix(*sec, 0)
+}
+
 // ValueOrZero returns the inner value if valid, otherwise zero.
 func (t Time) ValueOrZero() time.Time {
 	if !t.Valid {
